@@ -1,0 +1,52 @@
+M1 Method deposit
+- before: 25|  else if (balance + sum > bound || sum < 0 || sum > bound)
+- after : 25|  else if (balance + sum > bound || sum < 100 || sum > bound)
+- status: survived
+
+M2 Method deposit
+- before: 25|  else if (balance + sum > bound || sum < 0 || sum > bound) 
+- after : 25|  else if (balance + sum < bound || sum < 0 || sum > bound) 
+- status: killed 
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:cornerCase()]
+
+M3 Method withdraw
+- before: 34|  if (blocked)
+- after : 34|  if (!blocked)
+- status: killed
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:unblock()]
+
+M4 Method getBalance
+- before: 49|  return balance;
+- after : 49|  return 0;
+- status: killed
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:getBalance()]
+
+M5 Method getMaxCredit
+- before: 53|  return -maxCredit;
+- after : 53|  return maxCredit;
+- status: killed
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:unblock()]
+
+M6 Method isBlocked
+- before: 57|  return blocked;
+- after : 57|  return false;
+- status: killed
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:unblock()]
+
+M7 Method unblock
+- before: 65|  if (balance < maxCredit)
+- after : 65|  if (balance > maxCredit)
+- status: killed
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:getMaxCredit()]
+
+M8 Method setMaxCredit
+- before: 77|  return false;
+- after : 77|  return true;
+- status: killed
+- tests : root.account.AccountTest.[engine:junit-jupiter]/[class:root.account.AccountTest]/[method:setMaxCredit()]
+
+M8 Method setMaxCredit
+- before: 77|  if (!isBlocked() || c < -bound || c > bound) {
+- after : 77|  if (!isBlocked() || c <= -bound || c > bound) {
+- status: survived
+

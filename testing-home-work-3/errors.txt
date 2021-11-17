@@ -1,0 +1,27 @@
+Код до исправления 
+public int gcd(int x, int y)
+  {
+    int t;
+    
+    if(x < 0) x = -x;
+    if(y < 0) y = -y;
+    
+Данные на которых наблюдается некорректное поведение:
+GCD(-2^31, -2^31)
+
+Полученное значение -2^31, ожидаемое значение 2^31
+
+Код после исправления 
+
+public long gcd(int x, int y)
+{
+		if (x == y && x == Integer.MIN_VALUE)
+		{
+					return (long)Integer.MIN_VALUE * -1L;
+		}
+		 
+    int t;
+    
+    if(x < 0) x = -x;
+    if(y < 0) y = -y;
+

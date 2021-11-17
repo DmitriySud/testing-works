@@ -1,0 +1,17 @@
+// Ошибка 1. Не сходится сигнатура метода setMaxCredit. mc -> c
+public boolean setMaxCredit(int c) 
+
+// Ошибка 2. Не было проверки на то, что счёт заблокирован в метода setMaxCredit. 
+Проверка описана в п.3
+if (!isBlocked() || c < -bound || c > bound) {
+    return false;
+
+// Ошибка 3. метод withdraw. Из п.2 "В незаблокированном состоянии значение текущей суммы на счете не должно быть
+// МЕНЬШЕ отрицательного кредитного максимума." ситуация, когда они равны - допустима.
+else if (balance < maxCredit + sum)
+    return false;
+
+// Ошибка 4. Нет проверки на то, что по итогу баланс не превышает BOUND. В методе deposit
+else if (balance + sum > bound || sum < 0 || sum > bound)
+    return false;
+

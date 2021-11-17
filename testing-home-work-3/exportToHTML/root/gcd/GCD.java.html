@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>GCD.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #629755; font-weight: bold; font-style: italic;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+GCD.java</font>
+</center></td></tr></table>
+<pre><span class="s0">/**</span>
+ <span class="s0">* Copyright (c) 2009 ISP RAS.</span>
+ <span class="s0">* 109004, A. Solzhenitsina, 25, Moscow, Russia.</span>
+ <span class="s0">* All rights reserved.</span>
+ <span class="s0">*</span>
+ <span class="s0">* $Id$</span>
+ <span class="s0">* Created on Dec 22, 2015</span>
+ <span class="s0">*</span>
+ <span class="s0">*/</span>
+
+<span class="s2">package </span><span class="s1">root.gcd</span><span class="s2">;</span>
+
+<span class="s0">/**</span>
+ <span class="s0">* </span><span class="s3">@author </span><span class="s0">Victor Kuliamin</span>
+ <span class="s0">*</span>
+ <span class="s0">*/</span>
+<span class="s2">public class </span><span class="s1">GCD</span>
+<span class="s1">{</span>
+    <span class="s2">public long </span><span class="s1">gcd(</span><span class="s2">int </span><span class="s1">x</span><span class="s2">, int </span><span class="s1">y)</span>
+    <span class="s1">{</span>
+        <span class="s2">if </span><span class="s1">(x == y &amp;&amp; x == Integer.MIN_VALUE)</span>
+        <span class="s1">{</span>
+            <span class="s2">return </span><span class="s1">(</span><span class="s2">long</span><span class="s1">)Integer.MIN_VALUE * -</span><span class="s4">1L</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">int </span><span class="s1">t</span><span class="s2">;</span>
+
+        <span class="s2">if</span><span class="s1">(x &lt; </span><span class="s4">0</span><span class="s1">) x = -x</span><span class="s2">;</span>
+        <span class="s2">if</span><span class="s1">(y &lt; </span><span class="s4">0</span><span class="s1">) y = -y</span><span class="s2">;</span>
+
+        <span class="s2">while</span><span class="s1">(y != </span><span class="s4">0</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s2">if</span><span class="s1">(y &gt; x)</span>
+            <span class="s1">{</span>
+                <span class="s1">x = y-x</span><span class="s2">;</span>
+                <span class="s1">y = y-x</span><span class="s2">;</span>
+                <span class="s1">x = x+y</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s2">if</span><span class="s1">(y == </span><span class="s4">0</span><span class="s1">) </span><span class="s2">return </span><span class="s1">x</span><span class="s2">;</span>
+
+            <span class="s1">t = y</span><span class="s2">;</span>
+            <span class="s1">y = x%y</span><span class="s2">;</span>
+            <span class="s1">x = t</span><span class="s2">;</span>
+        <span class="s1">}</span>
+        <span class="s2">return </span><span class="s1">x</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

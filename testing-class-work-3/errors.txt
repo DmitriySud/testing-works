@@ -1,0 +1,42 @@
+Ошибка 1. В цикле метода Ньютона было не достаточное условие останова,
+из-за чего он мог зациклиться.
+Код до исправления :
+double res, tmp;
+...
+while (Math.abs(x - res * res) / x > eps ) {
+    i++;
+    tmp = res;
+    res = (tmp + x / tmp) / 2;
+}
+
+Данные на которых воиспроизвелась ошибка : Double.longBitsToDouble(0x0000060000000011L);
+
+Полученное занчение: Программа зациклилась 
+Ожидаемое занчение : Программа не зациклилась 
+
+Исправление : 
+double res, tmp = -1;
+while (Math.abs(x - res * res) / x > eps && tmp != res) {
+    i++;
+    tmp = res;
+    res = (tmp + x / tmp) / 2;
+}
+
+Ошибка 2. Не производилось округление.
+Код до исправления :
+*Отсутствует округление*
+
+Данные, на которых воиспроизвелась ошибка : Double.longBitsToDouble(0x3FF416E9592F380AL);
+
+Код после исправления : 
+double resSqDelta = Math.abs(res * res - x);
+double resUpSqDelta = Math.abs((res + eps) * (res + eps) - x);
+double resDownSqDelta = Math.abs((res - eps) * (res - eps) - x);
+
+if (resUpSqDelta < resSqDelta && resUpSqDelta < resDownSqDelta ||
+        resSqDelta == resUpSqDelta && (Double.doubleToLongBits(res) & 1) == 1) {
+    res += eps;
+} else if (resDownSqDelta < resSqDelta && resDownSqDelta < resUpSqDelta ||
+        resSqDelta == resDownSqDelta && (Double.doubleToLongBits(res) & 1) == 1) {
+    res -= eps;
+}
